@@ -1,0 +1,14 @@
+<!-- ALUMNO-LISTA.COMPONENT.HTML -->
+<p>
+  alumno-lista works!
+</p>
+
+<p *ngFor="let alu of alumnos" >{{alu.id}} - nombre: {{alu.nombre}}</p>
+
+<app-alumno 
+  *ngFor="let alu of alumnos"
+   [alumno]="alu" 
+   (editAlumno)="editarAlumno($event)"
+   (borrarAlumno)= "borrarAlumnoLista($event)"
+    >
+</app-alumno>

@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'alumnos';
+  entrada = 'López';
+
+  sayHi() {
+    return 'hola';
+  }
+
+  activar() {
+    return this.entrada.length > 3;
+  }
+
 }

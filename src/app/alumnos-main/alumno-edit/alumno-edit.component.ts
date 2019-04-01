@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { Alumno } from '../Alumno';
 
 @Component({
   selector: 'app-alumno-edit',
@@ -10,6 +12,7 @@ export class AlumnoEditComponent implements OnInit {
   modoAdd = true;
   id: number;
   carreras = ['ISC', 'ISI', 'IE', 'IES'];
+  alumno: Alumno;
   
   constructor(private route: ActivatedRoute) { }
 
@@ -22,9 +25,16 @@ export class AlumnoEditComponent implements OnInit {
           this.id = params.id;
         }else {
           this.modoAdd=true;
+          //TODO: solicitar al servicio el id siguiente
+          this.alumno = new Alumno(8,'',20,60,'ISI','M');
         }
       }
     );
+  }
+
+  submit(formulario: NgForm) {
+    console.log(formulario);
+    
   }
 
 }

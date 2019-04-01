@@ -4,10 +4,10 @@
       <img class="rounded-circle d-block mx-auto" src="https://randomuser.me/api/portraits/women/0.jpg">
   
   
-      <form  >
+      <form #f="ngForm" (ngSubmit)="submit(f)"  >
           <div class="form-group">
               <label for="">Nombre</label>
-              <input type="text" class="form-control nombre"  name="nombre" id="" aria-describedby="helpId"
+              <input [(ngModel)]="alumno.nombre" type="text" class="form-control nombre"  name="nombre" id="" aria-describedby="helpId"
                   placeholder="nombre alumno" required  >
          
               <label for="">Carrera</label>
@@ -15,10 +15,10 @@
                   placeholder="carrera alumno" required> -->
   
                   <div class="form-group">
-                    <select  class="form-control"  name="carrera"  >
-                      <!-- <option *ngFor="let opcion of carreras" > 
+                    <select  class="form-control"  name="carrera" [(ngModel)]="alumno.carrera"  >
+                      <option *ngFor="let opcion of carreras" > 
                           {{ opcion }}
-                      </option> -->
+                      </option>
                     </select>
                   </div>
           

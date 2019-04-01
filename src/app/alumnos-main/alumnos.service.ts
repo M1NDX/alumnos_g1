@@ -7,33 +7,34 @@ import { Alumno } from './Alumno';
 })
 export class AlumnosService {
   cambiaDato = new Subject<Alumno[]>();
+  private lastId = 1;
 
   alumnos: Alumno[] = [
-    new Alumno(1, 'Alicia', 23, 85, 'ISC', 'F'),
-    new Alumno(2, 'Alberto', 24, 50, 'ISC', 'M'),
-    new Alumno(3, 'Rodrigo', 23, 73, 'ISC', 'M'),
-    new Alumno(4, 'Marcela', 25, 58, 'ISC', 'F'),
+    new Alumno(this.lastId++, 'Alicia', 23, 85, 'ISC', 'F'),
+    new Alumno(this.lastId++, 'Alberto', 24, 50, 'ISC', 'M'),
+    new Alumno(this.lastId++, 'Rodrigo', 23, 73, 'ISC', 'M'),
+    new Alumno(this.lastId++, 'Marcela', 25, 58, 'ISC', 'F'),
   ];
   
-  // [
-  //   {
-  //     id: 1,
-  //     nombre: 'Alicia',
-  //     edad: 23,
-  //     calificacion: 85,
-  //     carrera: 'ISC',
-  //     sexo: 'F'
-  //   },
-  //   {
-  //     id: 2,
-  //     nombre: 'Alberto',
-  //     edad: 24,
-  //     calificacion: 50,
-  //     carrera: 'ISC',
-  //     sexo: 'M'
-  //   }
-  // ];
   constructor() { }
+
+  addAlumno(alumno: Alumno): boolean {
+    alumno.id = this.lastId++;
+
+    const al = this.alumnos.find(al=> al.nombre.toUpperCase() === alumno.nombre.toUpperCase());
+    if (al) { //existe alumno
+      this.lastId--;
+      return false;
+    }
+
+    this.alumnos.push(Object.assign({}, alumno)); //creamos una copia
+    this.notificarCambios();
+    return true;
+  }
+
+  getNextId(): number {
+    return this.lastId;
+  }
 
   getAlumnos(): Alumno[] {
     return this.alumnos.slice();

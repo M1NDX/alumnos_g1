@@ -1,9 +1,9 @@
 <!-- ALUMNO-LISTA.COMPONENT.HTML -->
-<p>
-  alumno-lista works!
-</p>
+<button (click) = "crear()"  type="button" id="btCrear" class="btn btn-success btn-lg mt-2" data-toggle="modal" data-target="#modelId">
+  Crear alumno
+</button>
 
-<p *ngFor="let alu of alumnos" >{{alu.id}} - nombre: {{alu.nombre}}</p>
+<!-- <p *ngFor="let alu of alumnos" >{{alu.id}} - nombre: {{alu.nombre}}</p> -->
 
 <app-alumno 
   *ngFor="let alu of alumnos"

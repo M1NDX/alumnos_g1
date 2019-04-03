@@ -18,6 +18,13 @@ export class AlumnosService {
   
   constructor() { }
 
+  editAlumno(alumno: Alumno) {
+    //TODO: buscar que no exista otro alumno con el mismo nombre
+    const pos = this.alumnos.findIndex(al => al.id === alumno.id);
+
+    Object.assign(this.alumnos[pos], alumno);
+    this.notificarCambios();
+  }
   addAlumno(alumno: Alumno): boolean {
     alumno.id = this.lastId++;
 
@@ -38,6 +45,11 @@ export class AlumnosService {
 
   getAlumnos(): Alumno[] {
     return this.alumnos.slice();
+  }
+
+  getAlumno(id: number): Alumno {
+    const pos = this.alumnos.findIndex(al => al.id === id);
+    return Object.assign({}, this.alumnos[pos]);
   }
 
   notificarCambios() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Alumno } from '../Alumno';
 import { AlumnosService } from '../alumnos.service';
@@ -19,7 +19,8 @@ export class AlumnoEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
        private alumnoService: AlumnosService,
-       private location: Location) { }
+       private location: Location,
+       private router: Router) { }
 
   ngOnInit() {
     this.route.params
@@ -27,9 +28,11 @@ export class AlumnoEditComponent implements OnInit {
       (params) => {
         if(params.id) {
           this.modoAdd=false;
-          this.id = params.id;
+          this.id = Number(params.id);
           this.error = false;
-          //TODO: En modo edición falta solicitar al servicio el alumno con el id obtenido
+          this.alumno = this.alumnoService.getAlumno(this.id);
+          console.log(this.id);
+          console.log(this.alumno);
         }else {
           this.modoAdd=true;
           this.error = false;
@@ -45,16 +48,21 @@ export class AlumnoEditComponent implements OnInit {
 
   submit(formulario: NgForm) {
     console.log(formulario);
-    if(this.alumnoService.addAlumno(this.alumno) ){
-      this.location.back();
-      
+
+    if(this.modoAdd){
+      if(!this.alumnoService.addAlumno(this.alumno) ){
+        this.error= true;
+      }
     }else{
-      this.error= true;
+      this.alumnoService.editAlumno(this.alumno);
     }
 
+     // this.location.back();
+     //this.router.navigate(['../'], {relativeTo: this.route});
+     this.router.navigate( ['/alumnos']);
   }
 
-  cancelar(formulario: NgForm){
+  cancelar(){
     this.location.back();
   }
 

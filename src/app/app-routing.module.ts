@@ -5,6 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { AlumnoListaComponent } from './alumnos-main/alumno-lista/alumno-lista.component';
 import { AlumnoDetalleComponent } from './alumnos-main/alumno-detalle/alumno-detalle.component';
 import { AlumnoEditComponent } from './alumnos-main/alumno-edit/alumno-edit.component';
+import { GruposComponent } from './grupos/grupos.component';
+import { GrupoEditComponent } from './grupos/grupo-edit/grupo-edit.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -14,6 +16,12 @@ const routes: Routes = [
     {path: ':id', component: AlumnoDetalleComponent},
     {path: ':id/edit', component: AlumnoEditComponent},
   ] },
+  {path: 'grupos', component: GruposComponent, children: [
+    // {path: '', component: AlumnoListaComponent},
+    {path: 'new', component: GrupoEditComponent},
+    // {path: ':id', component: AlumnoDetalleComponent},
+    // {path: ':id/edit', component: AlumnoEditComponent},
+  ] }
 
 
 ];

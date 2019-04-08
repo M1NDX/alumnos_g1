@@ -28,7 +28,7 @@ export class AlumnosService {
   addAlumno(alumno: Alumno): boolean {
     alumno.id = this.lastId++;
 
-    const al = this.alumnos.find(al=> al.nombre.toUpperCase() === alumno.nombre.toUpperCase());
+    const al = this.alumnos.find((al)=> al.nombre.toUpperCase() === alumno.nombre.toUpperCase());
     if (al) { //existe alumno
       this.lastId--;
       return false;

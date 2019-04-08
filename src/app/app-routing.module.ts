@@ -7,14 +7,15 @@ import { AlumnoDetalleComponent } from './alumnos-main/alumno-detalle/alumno-det
 import { AlumnoEditComponent } from './alumnos-main/alumno-edit/alumno-edit.component';
 import { GruposComponent } from './grupos/grupos.component';
 import { GrupoEditComponent } from './grupos/grupo-edit/grupo-edit.component';
+import { AuthGuardService } from './auth-guard.service';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'alumnos', component: AlumnosMainComponent, children: [
-    {path: '', component: AlumnoListaComponent},
-    {path: 'new', component: AlumnoEditComponent},
-    {path: ':id', component: AlumnoDetalleComponent},
-    {path: ':id/edit', component: AlumnoEditComponent},
+    {path: '', component: AlumnoListaComponent , canActivate: [AuthGuardService]},
+    {path: 'new', component: AlumnoEditComponent, canActivate: [AuthGuardService]},
+    {path: ':id', component: AlumnoDetalleComponent , canActivate: [AuthGuardService]},
+    {path: ':id/edit', component: AlumnoEditComponent, canActivate: [AuthGuardService]},
   ] },
   {path: 'grupos', component: GruposComponent, children: [
     // {path: '', component: AlumnoListaComponent},

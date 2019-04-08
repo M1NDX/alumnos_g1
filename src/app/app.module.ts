@@ -32,10 +32,11 @@ import { GrupoEditComponent } from './grupos/grupo-edit/grupo-edit.component';
     GrupoEditComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
+    
 
   ],
   providers: [],
